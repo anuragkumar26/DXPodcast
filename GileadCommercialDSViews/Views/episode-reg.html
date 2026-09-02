@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Episode Registration Form</title>
+
+    <style>
+
+        .podcast-form-wrapper {
+            font-family: Arial, Helvetica, sans-serif;
+            box-sizing: border-box;
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .title {
+            color: #c40033;
+            margin-bottom: 20px;
+        }
+
+        .row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 16px;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .required::after {
+            content: " *";
+            color: #c40033;
+        }
+
+        input,
+        select,
+        textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            font-size: 13px;
+        }
+
+            input:focus,
+            select:focus,
+            textarea:focus {
+                outline: none;
+            }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .btn-primary {
+            background: #c40033;
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+            .btn-primary:hover {
+                opacity: .9;
+            }
+
+        .error {
+            display: none;
+            color: red;
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        .invalid {
+            border-color: red !important;
+        }
+
+        @media(max-width:768px) {
+            .row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="episode-action-selector">
+        <h2>Episode Management</h2>
+
+        <div class="episode-action-options">
+            <label>
+                <input type="radio"
+                       name="episodeAction"
+                       value="create"
+                       checked>
+                Create Episode
+            </label>
+
+            <label>
+                <input type="radio"
+                       name="episodeAction"
+                       value="update">
+                Update Episode
+            </label>
+        </div>
+    </div>
+    <div class="container podcast-form-wrapper">
+        <form class="episode-form" id="episodeForm" novalidate>
+            <h1 class="title">Create Episode</h1>
+
+
+            <!-- Podcast Name -->
+            <div class="form-group">
+                <label for="podcastName" class="required">
+                    Podcast Name
+                </label>
+                <select id="podcastName">
+                    <option value="">Loading podcasts...</option>
+                </select>
+                <span class="error">
+                    Please select a podcast.
+                </span>
+            </div>
+
+            <!-- Episode Title -->
+            <div class="form-group">
+                <label for="episodeTitle" class="required">
+                    Episode Title
+                </label>
+                <input type="text"
+                       id="episodeTitle"
+                       placeholder="Enter episode title">
+                <span class="error">
+                    Episode title is required.
+                </span>
+            </div>
+
+            <!-- Episode Description -->
+            <div class="form-group">
+                <label for="episodeDescription" class="required">
+                    Episode Description
+                </label>
+                <textarea rows="5" cols="40"
+                          id="episodeDescription"
+                          placeholder="Enter episode description"></textarea>
+                <span class="error">
+                    Episode description is required.
+                </span>
+            </div>
+
+            <!-- Media Type & Media File -->
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="mediaType" class="required">
+                        Media Type
+                    </label>
+                    <select id="mediaType">
+                        <option value="">Select Media Type</option>
+                        <option>Audio</option>
+                        <option>Video</option>
+                    </select>
+                    <span class="error">
+                        Please select a media type.
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="mediaFile" class="required">
+                        Media File
+                    </label>
+                    <input type="file" id="mediaFile">
+                    <span class="error">
+                        Please upload a media file.
+                    </span>
+                </div>
+
+            </div>
+
+            <!-- Episode Number & Season Number -->
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="episodeNumber" class="required">
+                        Episode Number
+                    </label>
+                    <input type="number"
+                           min="1"
+                           id="episodeNumber">
+                    <span class="error">
+                        Episode number is required.
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="seasonNumber">
+                        Season Number
+                    </label>
+                    <input type="number"
+                           min="1"
+                           id="seasonNumber">
+                    <span class="error">Season number must be 1 or greater.</span>
+                </div>
+
+            </div>
+
+            <!-- Episode Type & Publication Date -->
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="episodeType" class="required">
+                        Episode Type
+                    </label>
+                    <select id="episodeType">
+                        <option value="">Select Episode Type</option>
+                        <option value="full">Full Episode</option>
+                        <option value="trailer">Trailer</option>
+                        <option value="bonus">Bonus</option>
+                    </select>
+                    <span class="error">
+                        Please select an episode type.
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="publicationDate" class="required">
+                        Publication Date & Time
+                    </label>
+                    <input type="datetime-local"
+                           id="publicationDate">
+                    <span class="error">
+                        Publication date is required.
+                    </span>
+                </div>
+
+            </div>
+
+            <!-- Explicit Content & Episode Artwork -->
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="episodeExplicitContent" class="required">
+                        Explicit Content
+                    </label>
+                    <select id="episodeExplicitContent">
+                        <option value="">Select</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                    <span class="error">
+                        Please select an option.
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="episodeArtwork">
+                        Episode Artwork
+                    </label>
+                    <input type="file"
+                           id="episodeArtwork"
+                           accept=".jpg,.jpeg,.png">
+                </div>
+
+            </div>
+
+            <!-- Episode Author & Publish Status -->
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="episodeAuthor" class="required">
+                        Episode Author / Host
+                    </label>
+                    <input type="text"
+                           id="episodeAuthor"
+                           placeholder="Enter author / host">
+                    <span class="error">
+                        Episode author is required.
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="publishStatus" class="required">
+                        Publish Status
+                    </label>
+                    <select id="publishStatus">
+                        <option value="">Select Status</option>
+                        <option>Draft</option>
+                        <option>Published</option>
+                        <option>Scheduled</option>
+                    </select>
+                    <span class="error">
+                        Please select a publish status.
+                    </span>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn-primary">
+                Submit
+            </button>
+
+        </form>
+
+        <!-- Update Episode Form -->
+        <form class="episode-form"
+              id="updateEpisodeForm"
+              style="display:none;"
+              novalidate>
+
+            <h1 class="title">Update Episode</h1>
+
+            <!-- Podcast -->
+            <div class="form-group">
+                <label for="updatePodcastName" class="required">
+                    Podcast Name
+                </label>
+
+                <select id="updatePodcastName">
+                    <option value="">Select Podcast</option>
+                </select>
+            </div>
+
+            <!-- Episode -->
+            <div class="form-group">
+                <label for="updateEpisodeSelect" class="required">
+                    Episode
+                </label>
+
+                <select id="updateEpisodeSelect">
+                    <option value="">Select Episode</option>
+                </select>
+            </div>
+
+            <!-- Episode Title -->
+            <div class="form-group">
+                <label for="updateEpisodeTitle" class="required">
+                    Episode Title
+                </label>
+
+                <input type="text"
+                       id="updateEpisodeTitle">
+            </div>
+
+            <!-- Episode Description -->
+            <div class="form-group">
+                <label for="updateEpisodeDescription" class="required">
+                    Episode Description
+                </label>
+
+                <textarea rows="5"
+                          id="updateEpisodeDescription"></textarea>
+            </div>
+
+            <!-- Media Type -->
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="updateMediaType" class="required">
+                        Media Type
+                    </label>
+
+                    <select id="updateMediaType">
+                        <option value="">Select Media Type</option>
+                        <option value="Audio">Audio</option>
+                        <option value="Video">Video</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="updateMediaFile">
+                        Replace Media File
+                    </label>
+
+                    <div id="currentMediaFile">
+                        No media file available.
+                    </div>
+
+                    <input type="file"
+                           id="updateMediaFile">
+                </div>
+
+            </div>
+
+            <!-- Episode Number & Season Number -->
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="updateEpisodeNumber" class="required">
+                        Episode Number
+                    </label>
+
+                    <input type="number"
+                           min="1"
+                           id="updateEpisodeNumber">
+                </div>
+
+                <div class="form-group">
+                    <label for="updateSeasonNumber">
+                        Season Number
+                    </label>
+
+                    <input type="number"
+                           min="1"
+                           id="updateSeasonNumber">
+                </div>
+
+            </div>
+
+            <!-- Episode Type & Publication Date -->
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="updateEpisodeType" class="required">
+                        Episode Type
+                    </label>
+
+                    <select id="updateEpisodeType">
+                        <option value="">Select Episode Type</option>
+                        <option value="full">Full Episode</option>
+                        <option value="trailer">Trailer</option>
+                        <option value="bonus">Bonus</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="updatePublicationDate" class="required">
+                        Publication Date & Time
+                    </label>
+
+                    <input type="datetime-local"
+                           id="updatePublicationDate">
+                </div>
+
+            </div>
+
+            <!-- Explicit Content & Artwork -->
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="updateExplicitContent" class="required">
+                        Explicit Content
+                    </label>
+
+                    <select id="updateExplicitContent">
+                        <option value="">Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="updateEpisodeArtwork">
+                        Replace Episode Artwork
+                    </label>
+
+                    <div id="currentEpisodeArtwork">
+                        No artwork available.
+                    </div>
+
+                    <input type="file"
+                           id="updateEpisodeArtwork"
+                           accept=".jpg,.jpeg,.png">
+                </div>
+
+            </div>
+
+            <!-- Episode Author & Publish Status -->
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="updateEpisodeAuthor" class="required">
+                        Episode Author / Host
+                    </label>
+
+                    <input type="text"
+                           id="updateEpisodeAuthor">
+                </div>
+
+                <div class="form-group">
+                    <label for="updatePublishStatus" class="required">
+                        Publish Status
+                    </label>
+
+                    <select id="updatePublishStatus">
+                        <option value="">Select Status</option>
+                        <option value="Draft">Draft</option>
+                        <option value="Published">Published</option>
+                        <option value="Scheduled">Scheduled</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button type="submit"
+                    class="btn-primary"
+                    id="updateEpisodeButton">
+                Update Episode
+            </button>
+
+        </form>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const episodeActionRadios =
+                document.querySelectorAll('input[name="episodeAction"]');
+
+            const createEpisodeForm =
+                document.getElementById('episodeForm');
+
+            const updateEpisodeForm =
+                document.getElementById('updateEpisodeForm');
+
+            episodeActionRadios.forEach(radio => {
+                radio.addEventListener('change', function () {
+
+                    if (this.value === 'create') {
+                        createEpisodeForm.style.display = '';
+                        updateEpisodeForm.style.display = 'none';
+                    }
+
+                    if (this.value === 'update') {
+                        createEpisodeForm.style.display = 'none';
+                        updateEpisodeForm.style.display = '';
+                    }
+
+                });
+            });
+
+            const form = document.getElementById('episodeForm');
+            if (!form) return;
+            // disable native browser validation UI; use custom JS validation instead
+            form.noValidate = true;
+
+            function showError(field, message) {
+                if (!field) return;
+                field.classList.add('invalid');
+                const err = field.parentElement && field.parentElement.querySelector('.error');
+                if (err) {
+                    if (message) err.textContent = message;
+                    err.style.display = 'block';
+                    err.setAttribute('role', 'alert');
+                    err.setAttribute('aria-live', 'assertive');
+                    err.setAttribute('aria-hidden', 'false');
+                }
+                field.setAttribute('aria-invalid', 'true');
+            }
+
+            function hideError(field) {
+                if (!field) return;
+                field.classList.remove('invalid');
+                const err = field.parentElement && field.parentElement.querySelector('.error');
+                if (err) { err.style.display = 'none'; err.setAttribute('aria-hidden', 'true'); }
+                field.removeAttribute('aria-invalid');
+            }
+
+            function validateRequired(field) {
+                if (!field) return false;
+                const val = (field.value || '').toString().trim();
+                if (val === '') { showError(field); return false; }
+                hideError(field); return true;
+            }
+
+            function validateFile(field) {
+                if (!field) return false;
+                if (field.files && field.files.length > 0) { hideError(field); return true; }
+                showError(field); return false;
+            }
+
+            function validateMinNumber(field, min) {
+                if (!field) return true;
+                const val = (field.value || '').toString().trim();
+                if (val === '') { hideError(field); return true; }
+                const n = Number(val);
+                if (Number.isNaN(n) || n < min) { showError(field, `Value must be ${min} or greater.`); return false; }
+                hideError(field); return true;
+            }
+
+            // set required attributes and wire error ids for accessibility
+            const requiredList = ['podcastName', 'episodeTitle', 'episodeDescription', 'mediaType', 'episodeNumber', 'episodeType', 'publicationDate', 'episodeExplicitContent', 'episodeAuthor', 'publishStatus'];
+            requiredList.forEach(id => { const f = document.getElementById(id); if (f) { f.required = true; f.setAttribute('aria-required', 'true'); } });
+            document.querySelectorAll('input, textarea, select').forEach(field => {
+                const err = field.parentElement && field.parentElement.querySelector('.error');
+                if (err) { if (!err.id && field.id) err.id = field.id + '-error'; if (field.id) field.setAttribute('aria-describedby', err.id); err.setAttribute('aria-hidden', 'true'); }
+            });
+            const podcastSelect = document.getElementById('podcastName');
+
+            fetch('/podcast/getpodcasts', {
+                method: 'GET'
+            })
+                .then(async response => {
+                    const data = await response.json();
+
+                    if (!response.ok || !data.success) {
+                        throw new Error(
+                            data.message || 'Unable to load podcasts.'
+                        );
+                    }
+
+                    return data;
+                })
+                .then(data => {
+                    podcastSelect.innerHTML =
+                        '<option value="">Select Podcast</option>';
+
+                    data.podcasts.forEach(podcast => {
+                        const option = document.createElement('option');
+
+                        option.value = podcast.slug;
+                        option.textContent = podcast.title;
+
+                        podcastSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    podcastSelect.innerHTML =
+                        '<option value="">Unable to load podcasts</option>';
+
+                    console.error(
+                        'Unable to load podcasts:',
+                        error
+                    );
+                });
+            const updatePodcastSelect =
+                document.getElementById('updatePodcastName');
+
+            if (updatePodcastSelect) {
+
+                fetch('/podcast/getpodcasts', {
+                    method: 'GET'
+                })
+                    .then(async response => {
+                        const data = await response.json();
+
+                        if (!response.ok || !data.success) {
+                            throw new Error(
+                                data.message || 'Unable to load podcasts.'
+                            );
+                        }
+
+                        return data;
+                    })
+                    .then(data => {
+
+                        updatePodcastSelect.innerHTML =
+                            '<option value="">Select Podcast</option>';
+
+                        data.podcasts.forEach(podcast => {
+
+                            const option =
+                                document.createElement('option');
+
+                            option.value = podcast.slug;
+                            option.textContent = podcast.title;
+
+                            updatePodcastSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => {
+
+                        updatePodcastSelect.innerHTML =
+                            '<option value="">Unable to load podcasts</option>';
+
+                        console.error(
+                            'Unable to load update podcasts:',
+                            error
+                        );
+                    });
+            }
+            const updateEpisodeSelect =
+                document.getElementById('updateEpisodeSelect');
+
+            if (updatePodcastSelect && updateEpisodeSelect) {
+
+                updatePodcastSelect.addEventListener('change', function () {
+
+                    const podcastSlug = this.value;
+
+                    updateEpisodeSelect.innerHTML =
+                        '<option value="">Loading episodes...</option>';
+
+                    if (!podcastSlug) {
+                        updateEpisodeSelect.innerHTML =
+                            '<option value="">Select Episode</option>';
+                        return;
+                    }
+
+                    fetch(
+                        '/podcast/episode/get?podcastSlug=' +
+                        encodeURIComponent(podcastSlug),
+                        {
+                            method: 'GET'
+                        }
+                    )
+                        .then(async response => {
+
+                            const data = await response.json();
+
+                            if (!response.ok || !data.success) {
+                                throw new Error(
+                                    data.message ||
+                                    'Unable to load episodes.'
+                                );
+                            }
+
+                            return data;
+                        })
+                        .then(data => {
+
+                            updateEpisodeSelect.innerHTML =
+                                '<option value="">Select Episode</option>';
+
+                            data.episodes.forEach(episode => {
+
+                                const option =
+                                    document.createElement('option');
+
+                                option.value = episode.id;
+
+                                option.textContent =
+                                    episode.title +
+                                    ' (Episode ' +
+                                    episode.episodeNumber +
+                                    ', Season ' +
+                                    episode.seasonNumber +
+                                    ')';
+
+                                updateEpisodeSelect.appendChild(option);
+                            });
+                        })
+                        .catch(error => {
+
+                            updateEpisodeSelect.innerHTML =
+                                '<option value="">Unable to load episodes</option>';
+
+                            console.error(
+                                'Unable to load update episodes:',
+                                error
+                            );
+                        });
+                });
+            }
+            // Load existing episode details when an episode is selected
+            if (updateEpisodeSelect) {
+
+                updateEpisodeSelect.addEventListener('change', function () {
+
+                    const episodeId = this.value;
+
+                    if (!episodeId) {
+                        return;
+                    }
+
+                    // Clear the form while loading
+                    document.getElementById('updateEpisodeTitle').value = '';
+                    document.getElementById('updateEpisodeDescription').value = '';
+                    document.getElementById('updateEpisodeAuthor').value = '';
+                    document.getElementById('updateMediaType').value = '';
+                    document.getElementById('updateEpisodeNumber').value = '';
+                    document.getElementById('updateSeasonNumber').value = '';
+                    document.getElementById('updateEpisodeType').value = '';
+                    document.getElementById('updateExplicitContent').value = '';
+                    document.getElementById('updatePublicationDate').value = '';
+                    document.getElementById('updatePublishStatus').value = '';
+                    document.getElementById('currentMediaFile').textContent =
+                        'Loading current media...';
+
+                    document.getElementById('currentEpisodeArtwork').textContent =
+                        'Loading current artwork...';
+
+                    fetch(
+                        '/podcast/episode/getdetails?id=' +
+                        encodeURIComponent(episodeId),
+                        {
+                            method: 'GET'
+                        }
+                    )
+                        .then(async response => {
+
+                            const data = await response.json();
+
+                            if (!response.ok || !data.success) {
+                                throw new Error(
+                                    data.message ||
+                                    'Unable to load episode details.'
+                                );
+                            }
+
+                            return data;
+                        })
+                        .then(data => {
+
+                            const episode = data.episode;
+
+                            document.getElementById(
+                                'updateEpisodeTitle'
+                            ).value = episode.title || '';
+
+                            document.getElementById(
+                                'updateEpisodeDescription'
+                            ).value = episode.description || '';
+
+                            document.getElementById(
+                                'updateEpisodeAuthor'
+                            ).value = episode.author || '';
+
+                            document.getElementById(
+                                'updateMediaType'
+                            ).value = episode.mediaType || '';
+
+                            document.getElementById(
+                                'updateEpisodeNumber'
+                            ).value = episode.episodeNumber || '';
+
+                            document.getElementById(
+                                'updateSeasonNumber'
+                            ).value = episode.seasonNumber || '';
+
+                            document.getElementById(
+                                'updateEpisodeType'
+                            ).value = episode.episodeType || '';
+
+                            document.getElementById(
+                                'updateExplicitContent'
+                            ).value =
+                                episode.explicitContent ? 'Yes' : 'No';
+
+                            document.getElementById(
+                                'updatePublishStatus'
+                            ).value = episode.publishStatus || '';
+
+                            // Convert Sitecore date:
+                            // 20260824T171100
+                            // to datetime-local:
+                            // 2026-08-24T17:11
+                            if (episode.publicationDate) {
+
+                                const date =
+                                    episode.publicationDate;
+
+                                const formattedDate =
+                                    date.substring(0, 4) + '-' +
+                                    date.substring(4, 6) + '-' +
+                                    date.substring(6, 8) + 'T' +
+                                    date.substring(9, 11) + ':' +
+                                    date.substring(11, 13);
+
+                                document.getElementById(
+                                    'updatePublicationDate'
+                                ).value = formattedDate;
+                            }
+                            const currentMediaFile =
+                                document.getElementById('currentMediaFile');
+
+                            if (currentMediaFile) {
+
+                                if (episode.mediaUrl) {
+
+                                    const mediaLink =
+                                        document.createElement('a');
+
+                                    mediaLink.href = episode.mediaUrl;
+                                    mediaLink.target = '_blank';
+                                    mediaLink.textContent =
+                                        'Open current media file';
+
+                                    currentMediaFile.innerHTML = '';
+                                    currentMediaFile.appendChild(mediaLink);
+
+                                } else {
+
+                                    currentMediaFile.textContent =
+                                        'No media file available.';
+                                }
+                            }
+
+
+                            const currentEpisodeArtwork =
+                                document.getElementById('currentEpisodeArtwork');
+
+                            if (currentEpisodeArtwork) {
+
+                                if (episode.artworkUrl) {
+
+                                    const artworkImage =
+                                        document.createElement('img');
+
+                                    artworkImage.src = episode.artworkUrl;
+                                    artworkImage.alt = 'Current episode artwork';
+
+                                    artworkImage.style.maxWidth = '150px';
+                                    artworkImage.style.maxHeight = '150px';
+
+                                    currentEpisodeArtwork.innerHTML = '';
+                                    currentEpisodeArtwork.appendChild(artworkImage);
+
+                                } else {
+
+                                    currentEpisodeArtwork.textContent =
+                                        'No artwork available.';
+                                }
+                            }
+                        })
+                        .catch(error => {
+
+                            console.error(
+                                'Unable to load episode details:',
+                                error
+                            );
+
+                            alert(
+                                'Unable to load episode details.'
+                            );
+                        });
+                });
+            }
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                let isValid = true;
+                document.querySelectorAll('.error').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+
+                const requiredFields = [
+                    'podcastName', 'episodeTitle', 'episodeDescription', 'mediaType', 'episodeNumber', 'episodeType', 'publicationDate', 'episodeExplicitContent', 'episodeAuthor', 'publishStatus'
+                ];
+
+                requiredFields.forEach(id => { const f = document.getElementById(id); if (!validateRequired(f)) isValid = false; });
+
+                const mediaFile = document.getElementById('mediaFile'); if (!validateFile(mediaFile)) isValid = false;
+                const seasonNumber = document.getElementById('seasonNumber'); if (!validateMinNumber(seasonNumber, 1)) isValid = false;
+                //start
+                //start
+                if (!isValid) {
+                    const firstInvalid = form.querySelector('.invalid');
+
+                    if (firstInvalid) {
+                        try {
+                            firstInvalid.focus();
+                            firstInvalid.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'center'
+                            });
+                        } catch (e) { }
+                    }
+
+                    return;
+                }
+
+                const submitButton =
+                    form.querySelector('button[type="submit"]');
+
+                submitButton.disabled = true;
+                submitButton.textContent = 'Saving...';
+
+
+                const formData = new FormData();
+
+                formData.append(
+                    'PodcastSlug',
+                    document.getElementById('podcastName').value
+                );
+
+                formData.append(
+                    'EpisodeTitle',
+                    document.getElementById('episodeTitle').value.trim()
+                );
+
+                formData.append(
+                    'EpisodeDescription',
+                    document.getElementById('episodeDescription').value.trim()
+                );
+
+                formData.append(
+                    'EpisodeAuthor',
+                    document.getElementById('episodeAuthor').value.trim()
+                );
+
+                formData.append(
+                    'MediaType',
+                    document.getElementById('mediaType').value
+                );
+
+                formData.append(
+                    'EpisodeNumber',
+                    document.getElementById('episodeNumber').value
+                );
+
+                formData.append(
+                    'SeasonNumber',
+                    document.getElementById('seasonNumber').value
+                );
+
+                formData.append(
+                    'EpisodeType',
+                    document.getElementById('episodeType').value
+                );
+
+                formData.append(
+                    'ExplicitContent',
+                    document.getElementById('episodeExplicitContent').value === 'Yes'
+                );
+
+                formData.append(
+                    'PublicationDate',
+                    document.getElementById('publicationDate').value
+                );
+
+                formData.append(
+                    'PublishStatus',
+                    document.getElementById('publishStatus').value
+                );
+
+                if (mediaFile.files.length > 0) {
+                    formData.append(
+                        'MediaFile',
+                        mediaFile.files[0]
+                    );
+                }
+                const episodeArtwork =
+                    document.getElementById('episodeArtwork');
+
+                if (episodeArtwork.files.length > 0) {
+                    formData.append(
+                        'EpisodeArtwork',
+                        episodeArtwork.files[0]
+                    );
+                }
+
+                fetch('/podcast/episode/create', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(async response => {
+
+                        const data = await response.json();
+
+                        if (!response.ok || !data.success) {
+                            throw new Error(
+                                data.message ||
+                                'Unable to create episode.'
+                            );
+                        }
+
+                        return data;
+                    })
+                    .then(data => {
+
+                        alert(
+                            'Episode saved successfully!\n\n' +
+                            'Episode GUID: ' +
+                            (data.guid || 'Generated successfully')
+                        );
+
+                        form.reset();
+
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Submit';
+                    })
+                    .catch(error => {
+
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Submit';
+
+                        alert(
+                            'Unable to save episode.\n\n' +
+                            error.message
+                        );
+                    });
+                //end
+                //end
+            });
+            // Update Episode submit
+            if (updateEpisodeSelect) {
+
+                updateEpisodeSelect.closest('form')
+                    .addEventListener('submit', function (e) {
+
+                        e.preventDefault();
+
+                        const episodeId =
+                            updateEpisodeSelect.value;
+
+                        if (!episodeId) {
+                            alert('Please select an episode.');
+                            return;
+                        }
+
+                        const updateButton =
+                            this.querySelector('button[type="submit"]');
+
+                        updateButton.disabled = true;
+                        updateButton.textContent = 'Updating...';
+
+                        const formData = new FormData();
+
+                        formData.append(
+                            'EpisodeItemId',
+                            episodeId
+                        );
+
+                        formData.append(
+                            'EpisodeTitle',
+                            document.getElementById(
+                                'updateEpisodeTitle'
+                            ).value.trim()
+                        );
+
+                        formData.append(
+                            'EpisodeDescription',
+                            document.getElementById(
+                                'updateEpisodeDescription'
+                            ).value.trim()
+                        );
+
+                        formData.append(
+                            'EpisodeAuthor',
+                            document.getElementById(
+                                'updateEpisodeAuthor'
+                            ).value.trim()
+                        );
+
+                        formData.append(
+                            'MediaType',
+                            document.getElementById(
+                                'updateMediaType'
+                            ).value
+                        );
+
+                        formData.append(
+                            'EpisodeNumber',
+                            document.getElementById(
+                                'updateEpisodeNumber'
+                            ).value
+                        );
+
+                        formData.append(
+                            'SeasonNumber',
+                            document.getElementById(
+                                'updateSeasonNumber'
+                            ).value
+                        );
+
+                        formData.append(
+                            'EpisodeType',
+                            document.getElementById(
+                                'updateEpisodeType'
+                            ).value
+                        );
+
+                        formData.append(
+                            'ExplicitContent',
+                            document.getElementById(
+                                'updateExplicitContent'
+                            ).value === 'Yes'
+                        );
+
+                        formData.append(
+                            'PublicationDate',
+                            document.getElementById(
+                                'updatePublicationDate'
+                            ).value
+                        );
+
+                        formData.append(
+                            'PublishStatus',
+                            document.getElementById(
+                                'updatePublishStatus'
+                            ).value
+                        );
+
+                        const mediaFile =
+                            document.getElementById(
+                                'updateMediaFile'
+                            );
+
+                        if (mediaFile.files.length > 0) {
+
+                            formData.append(
+                                'MediaFile',
+                                mediaFile.files[0]
+                            );
+                        }
+
+                        const episodeArtwork =
+                            document.getElementById(
+                                'updateEpisodeArtwork'
+                            );
+
+                        if (episodeArtwork.files.length > 0) {
+
+                            formData.append(
+                                'EpisodeArtwork',
+                                episodeArtwork.files[0]
+                            );
+                        }
+
+                        fetch('/podcast/episode/update', {
+                            method: 'POST',
+                            body: formData
+                        })
+                            .then(async response => {
+
+                                const data =
+                                    await response.json();
+
+                                if (!response.ok ||
+                                    !data.success) {
+
+                                    throw new Error(
+                                        data.message ||
+                                        'Unable to update episode.'
+                                    );
+                                }
+
+                                return data;
+                            })
+                            .then(data => {
+
+                                alert(
+                                    'Episode updated successfully.'
+                                );
+
+                                // Reload the episode details from Sitecore
+                                fetch(
+                                    '/podcast/episode/getdetails?id=' +
+                                    encodeURIComponent(episodeId),
+                                    {
+                                        method: 'GET'
+                                    }
+                                )
+                                    .then(async response => {
+
+                                        const refreshedData =
+                                            await response.json();
+
+                                        if (!response.ok ||
+                                            !refreshedData.success) {
+
+                                            throw new Error(
+                                                refreshedData.message ||
+                                                'Episode was updated, but the refreshed data could not be loaded.'
+                                            );
+                                        }
+
+                                        return refreshedData;
+                                    })
+                                    .then(refreshedData => {
+
+                                        const episode =
+                                            refreshedData.episode;
+
+                                        document.getElementById(
+                                            'updateEpisodeTitle'
+                                        ).value = episode.title || '';
+
+                                        document.getElementById(
+                                            'updateEpisodeDescription'
+                                        ).value = episode.description || '';
+
+                                        document.getElementById(
+                                            'updateEpisodeAuthor'
+                                        ).value = episode.author || '';
+
+                                        document.getElementById(
+                                            'updateMediaType'
+                                        ).value = episode.mediaType || '';
+
+                                        document.getElementById(
+                                            'updateEpisodeNumber'
+                                        ).value = episode.episodeNumber || '';
+
+                                        document.getElementById(
+                                            'updateSeasonNumber'
+                                        ).value = episode.seasonNumber || '';
+
+                                        document.getElementById(
+                                            'updateEpisodeType'
+                                        ).value = episode.episodeType || '';
+
+                                        document.getElementById(
+                                            'updateExplicitContent'
+                                        ).value =
+                                            episode.explicitContent
+                                                ? 'Yes'
+                                                : 'No';
+
+                                        document.getElementById(
+                                            'updatePublishStatus'
+                                        ).value =
+                                            episode.publishStatus || '';
+
+                                        if (episode.publicationDate) {
+
+                                            const date =
+                                                episode.publicationDate;
+
+                                            const formattedDate =
+                                                date.substring(0, 4) + '-' +
+                                                date.substring(4, 6) + '-' +
+                                                date.substring(6, 8) + 'T' +
+                                                date.substring(9, 11) + ':' +
+                                                date.substring(11, 13);
+
+                                            document.getElementById(
+                                                'updatePublicationDate'
+                                            ).value = formattedDate;
+                                        }
+
+                                        // Refresh current media
+                                        const currentMediaFile =
+                                            document.getElementById(
+                                                'currentMediaFile'
+                                            );
+
+                                        if (episode.mediaUrl) {
+
+                                            const mediaLink =
+                                                document.createElement('a');
+
+                                            mediaLink.href =
+                                                episode.mediaUrl;
+
+                                            mediaLink.target = '_blank';
+
+                                            mediaLink.textContent =
+                                                'Open current media file';
+
+                                            currentMediaFile.innerHTML = '';
+
+                                            currentMediaFile.appendChild(
+                                                mediaLink
+                                            );
+
+                                        } else {
+
+                                            currentMediaFile.textContent =
+                                                'No media file available.';
+                                        }
+
+                                        // Refresh current artwork
+                                        const currentEpisodeArtwork =
+                                            document.getElementById(
+                                                'currentEpisodeArtwork'
+                                            );
+
+                                        if (episode.artworkUrl) {
+
+                                            const artworkImage =
+                                                document.createElement('img');
+
+                                            artworkImage.src =
+                                                episode.artworkUrl;
+
+                                            artworkImage.alt =
+                                                'Current episode artwork';
+
+                                            artworkImage.style.maxWidth =
+                                                '150px';
+
+                                            artworkImage.style.maxHeight =
+                                                '150px';
+
+                                            currentEpisodeArtwork.innerHTML =
+                                                '';
+
+                                            currentEpisodeArtwork.appendChild(
+                                                artworkImage
+                                            );
+
+                                        } else {
+
+                                            currentEpisodeArtwork.textContent =
+                                                'No artwork available.';
+                                        }
+
+                                        updateButton.disabled = false;
+
+                                        updateButton.textContent =
+                                            'Update Episode';
+                                    })
+                                    .catch(error => {
+
+                                        console.error(
+                                            'Episode updated, but refresh failed:',
+                                            error
+                                        );
+
+                                        updateButton.disabled = false;
+
+                                        updateButton.textContent =
+                                            'Update Episode';
+
+                                        alert(
+                                            'Episode was updated successfully, but the form could not be refreshed.'
+                                        );
+                                    });
+                            })
+                            .catch(error => {
+
+                                updateButton.disabled = false;
+                                updateButton.textContent = 'Update Episode';
+
+                                alert(
+                                    'Unable to update episode.\n\n' +
+                                    error.message
+                                );
+                            });
+                    });
+            }
+            // live feedback: files on change; other inputs hide error when non-empty
+            document.querySelectorAll('input, textarea, select').forEach(field => {
+                const eventType = (field.type === 'file' || field.tagName === 'SELECT') ? 'change' : 'input';
+                field.addEventListener(eventType, function () {
+                    if (this.id === 'seasonNumber') {
+                        validateMinNumber(this, 1);
+                        return;
+                    }
+                    if (this.type === 'file') {
+                        if (this.files && this.files.length > 0) hideError(this);
+                        return;
+                    }
+                    const v = (this.value || '').toString().trim();
+                    if (v !== '') hideError(this);
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>

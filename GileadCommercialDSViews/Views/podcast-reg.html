@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podcast Information Form</title>
+
+    <style>
+        .podcast-form-wrapper {
+            font-family: Arial, Helvetica, sans-serif;
+            box-sizing:border-box; 
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .title {
+            color: #c40033;
+            margin-bottom: 20px;
+        }
+
+        .row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 16px;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .required::after {
+            content: " *";
+            color: #c40033;
+        }
+
+        input,
+        select,
+        textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            font-size: 13px;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .btn-primary {
+            background: #c40033;
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            opacity: .9;
+        }
+
+        /* no disabled button styling - submit button remains enabled and validation shows errors */
+
+        .error {
+            display: none;
+            color: red;
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        .invalid {
+            border-color: red !important;
+        }
+
+        @media (max-width: 768px) {
+            .row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container podcast-form-wrapper">
+
+        <h1 class="title">Podcast Information</h1>
+
+        <form  class="podcast-form" id="podcastForm">
+
+            <!-- Podcast Title -->
+            <div class="form-group">
+                <label for="podcastTitle" class="required">
+                    Podcast Name / Title
+                </label>
+                <input
+                    type="text"
+                    id="podcastTitle"
+                    placeholder="Enter podcast title">
+                <span class="error">
+                    Podcast title is required.
+                </span>
+            </div>
+
+            <!-- Podcast Description -->
+            <div class="form-group">
+                <label for="podcastDescription" class="required">
+                    Podcast Description
+                </label>
+                <textarea rows="5" cols="40"
+                    id="podcastDescription"
+                    placeholder="Enter podcast description"></textarea>
+                <span class="error">
+                    Podcast description is required.
+                </span>
+            </div>
+
+            <!-- Author / Host + Category -->
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="authorHost" class="required">
+                        Author / Host
+                    </label>
+                    <input
+                        type="text"
+                        id="authorHost"
+                        placeholder="Enter author / host">
+                    <span class="error">
+                        Author / Host is required.
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="category" class="required">
+                        Category
+                    </label>
+                    <select id="category">
+                        <option value="">Select Category</option>
+                        <option>Business</option>
+                        <option>Technology</option>
+                        <option>Health</option>
+                        <option>Education</option>
+                        <option>News</option>
+                        <option>Entertainment</option>
+                        <option>Sports</option>
+                    </select>
+                    <span class="error">
+                        Please select a category.
+                    </span>
+                </div>
+
+            </div>
+
+            <!-- Language + Podcast Type -->
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="language" class="required">
+                        Language
+                    </label>
+                    <select id="language">
+                        <option value="">Select Language</option>
+                        <option value="en-us">English</option>
+                    </select>
+                    <span class="error">
+                        Please select a language.
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="podcastType" class="required">
+                        Podcast Type
+                    </label>
+                    <select id="podcastType">
+                        <option value="">Select Podcast Type</option>
+                        <option value="episodic">Episodic</option>
+                        <option value="serial">Serial</option>
+                    </select>
+                    <span class="error">
+                        Please select a podcast type.
+                    </span>
+                </div>
+
+            </div>
+
+            <!-- Cover Artwork + Website -->
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="coverArtwork" class="required">
+                        Podcast Cover Artwork
+                    </label>
+                    <input
+                        type="file"
+                        id="coverArtwork"
+                        accept=".jpg,.jpeg,.png">
+                    <span class="error">
+                        Please upload a cover artwork image.
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="websiteUrl">
+                        Website URL
+                    </label>
+                    <input
+                        type="url"
+                        id="websiteUrl"
+                        placeholder="https://www.example.com">
+                    <span class="error">Please enter a valid URL (for example: https://example.com).</span>
+                </div>
+
+            </div>
+
+            <!-- Copyright + Explicit Content -->
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="copyright" class="required">
+                        Copyright
+                    </label>
+                    <input
+                        type="text"
+                        id="copyright"
+                        placeholder="Enter copyright information">
+                    <span class="error">
+                        Copyright is required.
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="explicitContent" class="required">
+                        Explicit Content
+                    </label>
+                    <select id="explicitContent">
+                        <option value="">Select</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                    <span class="error">
+                        Please select an option.
+                    </span>
+                </div>
+
+            </div>
+
+            <!-- Owner Details -->
+            <div class="row">
+
+                <div class="form-group">
+                    <label for="ownerName" class="required">
+                        Owner Name
+                    </label>
+                    <input
+                        type="text"
+                        id="ownerName"
+                        placeholder="Enter owner name">
+                    <span class="error">
+                        Owner name is required.
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="ownerEmail" class="required">
+                        Owner Email
+                    </label>
+                    <input
+                        type="email"
+                        id="ownerEmail"
+                        placeholder="owner@example.com"
+                        pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$">
+                    <span class="error">
+                        Please enter a valid email address.
+                    </span>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn-primary">
+                Submit
+            </button>
+
+        </form>
+
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const formReg = document.getElementById('podcastForm');
+        if (!formReg) return;
+
+        // Disable browser's native constraint validation — use custom JS validation instead
+        formReg.noValidate = true;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+        function showError(field, message) {
+            if (!field) return;
+            field.classList.add('invalid');
+            const err = field.parentElement && field.parentElement.querySelector('.error');
+
+            if (err) {
+                const msg = message || err.textContent || 'This field is required.';
+                err.textContent = msg;
+                err.style.display = 'block';
+                err.setAttribute('role', 'alert');
+                err.setAttribute('aria-live', 'assertive');
+                err.setAttribute('aria-hidden', 'false');
+            }
+            field.setAttribute('aria-invalid', 'true');
+        }
+
+        function hideError(field) {
+            if (!field) return;
+            field.classList.remove('invalid');
+            const err = field.parentElement && field.parentElement.querySelector('.error');
+            if (err) {
+                err.style.display = 'none';
+                err.setAttribute('aria-hidden', 'true');
+            }
+            field.removeAttribute('aria-invalid');
+        }
+
+        function validateRequired(field) {
+            if (!field) return false;
+            const val = (field.value || '').toString().trim();
+            if (val === '') {
+                showError(field);
+                return false;
+            }
+            hideError(field);
+            return true;
+        }
+
+        function validateEmail(field) {
+            if (!field) return false;
+            const val = (field.value || '').toString().trim();
+            if (val === '') {
+                showError(field, 'Owner Email is required.');
+                return false;
+            }
+            if (!emailPattern.test(val)) {
+                showError(field, 'Please enter a valid email address (for example: abc@mail.com).');
+                return false;
+            }
+            hideError(field);
+            return true;
+        }
+
+        // Website URL validator: accepts empty (optional field). Requires http/https scheme.
+        function validateURL(field) {
+            if (!field) return true;
+            const val = (field.value || '').toString().trim();
+            if (val === '') {
+                hideError(field);
+                return true;
+            }
+            try {
+                const u = new URL(val);
+                if (!['http:', 'https:'].includes(u.protocol)) {
+                    showError(field, 'URL must start with http:// or https://');
+                    return false;
+                }
+                hideError(field);
+                return true;
+            } catch (e) {
+                showError(field, 'Please enter a valid URL (for example: https://example.com).');
+                return false;
+            }
+        }
+
+        function validateFile(field) {
+            if (!field) return false;
+            if (field.files && field.files.length > 0) {
+                hideError(field);
+                return true;
+            }
+            showError(field);
+            return false;
+        }
+
+        // mark required inputs for browser + accessibility
+        const requiredList = [
+            'podcastTitle',
+            'podcastDescription',
+            'authorHost',
+            'category',
+            'language',
+            'podcastType',
+            'copyright',
+            'explicitContent',
+            'ownerName'
+        ];
+
+        requiredList.forEach(id => {
+            const f = document.getElementById(id);
+            if (f) f.required = true;
+        });
+
+        // wire error spans -> aria-describedby and initialise aria-hidden
+        document.querySelectorAll('input, textarea, select').forEach(field => {
+            const err = field.parentElement && field.parentElement.querySelector('.error');
+            if (err) {
+                if (!err.id && field.id) {
+                    err.id = field.id + '-error';
+                }
+                field.setAttribute('aria-describedby', err.id);
+                err.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        formReg.addEventListener('submit', function (e) {
+            e.preventDefault();
+            let isValid = true;
+            document.querySelectorAll('.error').forEach(el => { el.style.display = 'none';});
+            document.querySelectorAll('.invalid').forEach(el => { el.classList.remove('invalid');});
+            
+            requiredList.forEach(id => {
+                const f = document.getElementById(id);
+                if (!validateRequired(f)) {
+                    isValid = false;
+                }
+            });
+
+            const ownerEmail = document.getElementById('ownerEmail');
+            if (!validateEmail(ownerEmail)) {
+                isValid = false;
+            }
+
+            const website = document.getElementById('websiteUrl');
+            if (!validateURL(website)) {
+                isValid = false;
+            }
+
+            const coverArtwork = document.getElementById('coverArtwork');
+            if (!validateFile(coverArtwork)) {
+                isValid = false;
+            }
+
+            if (!isValid) {
+                const firstInvalid = formReg.querySelector('.invalid');
+
+                if (firstInvalid) {
+                    try {
+                        firstInvalid.focus();
+                        firstInvalid.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    } catch (e) {}
+                }
+
+                return;
+            }
+            // alert('Podcast saved successfully!');
+            const submitButton = formReg.querySelector('button[type="submit"]');
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Saving...';
+
+            const formData = new FormData();
+
+            formData.append(
+                'PodcastTitle',
+                document.getElementById('podcastTitle').value.trim()
+            );
+
+            formData.append(
+                'PodcastDescription',
+                document.getElementById('podcastDescription').value.trim()
+            );
+
+            formData.append(
+                'Author',
+                document.getElementById('authorHost').value.trim()
+            );
+
+            formData.append(
+                'Category',
+                document.getElementById('category').value
+            );
+
+            formData.append(
+                'Language',
+                document.getElementById('language').value
+            );
+
+            formData.append(
+                'PodcastType',
+                document.getElementById('podcastType').value
+            );
+
+            formData.append(
+                'WebsiteUrl',
+                document.getElementById('websiteUrl').value.trim()
+            );
+
+            formData.append(
+                'Copyright',
+                document.getElementById('copyright').value.trim()
+            );
+
+            formData.append(
+                'ExplicitContent',
+                document.getElementById('explicitContent').value === 'Yes'
+            );
+
+            formData.append(
+                'OwnerName',
+                document.getElementById('ownerName').value.trim()
+            );
+
+            formData.append(
+                'OwnerEmail',
+                document.getElementById('ownerEmail').value.trim()
+            );
+
+            // Add the actual artwork file
+
+            if (coverArtwork.files.length > 0) {
+                formData.append(
+                    'PodcastArtwork',
+                    coverArtwork.files[0]
+                );
+            }
+
+            fetch('/podcast/create', {
+                method: 'POST',
+                body: formData
+            })
+                .then(async response => {
+                    const data = await response.json();
+
+                    if (!response.ok || !data.success) {
+                        throw new Error(
+                            data.message || 'Unable to create podcast.'
+                        );
+                    }
+
+                    return data;
+                })
+                .then(data => {
+                    alert(
+                        'Podcast saved successfully!\n\n' +
+                        'Podcast Slug: ' + data.podcastSlug
+                    );
+
+                    formReg.reset();
+
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Submit';
+                })
+                .catch(error => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Submit';
+
+                    alert(
+                        'Unable to save podcast.\n\n' +
+                        error.message
+                    );
+                });
+        });
+
+        // live validation: validate email on change/input, files on change, hide errors for others when non-empty
+            
+        document.querySelectorAll('input, textarea, select').forEach(field => {
+            const eventType =
+                (field.type === 'file' || field.tagName === 'SELECT')
+                    ? 'change'
+                    : 'input';
+
+            field.addEventListener(eventType, function () {
+
+                if (this.id === 'websiteUrl') {
+                    validateURL(this);
+                    return;
+                }
+
+                if (this.type === 'email') {
+                    const v = (this.value || '').toString().trim();
+
+                    if (v === '') {
+                        hideError(this);
+                        return;
+                    }
+
+                    if (!emailPattern.test(v)) {
+                        showError(
+                            this,
+                            'Please enter a valid email address (for example: john.doe@example.com).'
+                        );
+                        return;
+                    }
+
+                    hideError(this);
+                    return;
+                }
+
+                if (this.type === 'file') {
+                    if (this.files && this.files.length > 0) {
+                        hideError(this);
+                    }
+                    return;
+                }
+
+                const v = (this.value || '').toString().trim();
+
+                if (v !== '') {
+                    hideError(this);
+                }
+            });
+        });
+    });
+    </script>
+
+</body>
+</html> 
